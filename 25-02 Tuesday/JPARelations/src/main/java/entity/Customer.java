@@ -50,8 +50,13 @@ public class Customer implements Serializable {
 
     public void addAddresses(Address address) {
         addresses.add(address);
+        address.addCustomers(this);
     }
     
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
     public Customer(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;

@@ -25,6 +25,15 @@ public class Address implements Serializable {
     @ManyToMany(mappedBy = "addresses")
     private List<Customer> customers;
     
+    public void addCustomers(Customer customer) {
+        customers.add(customer);
+        customer.addAddresses(this);
+    }
+    
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+    
     public Address(String street, String city) {
         this.street = street;
         this.city = city;
