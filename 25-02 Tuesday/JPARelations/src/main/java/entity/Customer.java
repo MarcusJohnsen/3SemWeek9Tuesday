@@ -36,8 +36,7 @@ public class Customer implements Serializable {
     @Column(name="hobby_name")
     private List<String> hobbies = new ArrayList();
     
-    @OneToMany
-    @JoinColumn
+    @OneToMany(mappedBy = "customer")
     private List<Address> addresses = new ArrayList();
     
     
