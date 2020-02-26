@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -36,9 +37,8 @@ public class Customer implements Serializable {
     @Column(name="hobby_name")
     private List<String> hobbies = new ArrayList();
     
-    @OneToMany(mappedBy = "customer")
+    @ManyToMany
     private List<Address> addresses = new ArrayList();
-    
     
     public void addHobby(String s) {
         hobbies.add(s);

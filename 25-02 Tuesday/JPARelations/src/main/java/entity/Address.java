@@ -1,10 +1,12 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -20,8 +22,8 @@ public class Address implements Serializable {
     private String street;
     private String city;
     
-    @ManyToOne
-    private Customer customer;
+    @ManyToMany(mappedBy = "addresses")
+    private List<Customer> customers;
     
     public Address(String street, String city) {
         this.street = street;
