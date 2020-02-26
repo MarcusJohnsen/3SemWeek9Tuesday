@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +18,9 @@ public class Address implements Serializable {
     private Integer id;
     private String street;
     private String city;
+    
+    @OneToOne(mappedBy = "address")
+    private Customer customer;
 
     public Address(String street, String city) {
         this.street = street;
