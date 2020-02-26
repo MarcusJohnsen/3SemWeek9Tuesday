@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -35,8 +36,9 @@ public class Customer implements Serializable {
     @Column(name="hobby_name")
     private List<String> hobbies = new ArrayList();
     
-    @OneToOne
-    private Address address;
+    @OneToMany
+    @JoinColumn
+    private List<Address> addresses = new ArrayList();
     
     
     public void addHobby(String s) {
@@ -47,6 +49,9 @@ public class Customer implements Serializable {
         return String.join(",", hobbies);
     }
 
+    public void addAddresses(Address address) {
+        addresses.add(address);
+    }
     
     public Customer(String firstName, String lastName) {
         this.firstName = firstName;

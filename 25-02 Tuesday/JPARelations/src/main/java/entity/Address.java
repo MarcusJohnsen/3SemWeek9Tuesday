@@ -19,9 +19,6 @@ public class Address implements Serializable {
     private String street;
     private String city;
     
-    @OneToOne(mappedBy = "address")
-    private Customer customer;
-
     public Address(String street, String city) {
         this.street = street;
         this.city = city;

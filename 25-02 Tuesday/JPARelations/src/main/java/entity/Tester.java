@@ -14,8 +14,14 @@ public class Tester {
         em.getTransaction().begin();
         Customer c1 = new Customer("John", "Doe");
         Customer c2 = new Customer("Jane", "Doe");
+        Address a1 = new Address("Jensensgade", "København");
+        Address a2 = new Address("Jørgensensgade", "København");
+        em.persist(a1);
+        em.persist(a2);
         c1.addHobby("football"); c1.addHobby("basketball");
         c2.addHobby("hockey"); c2.addHobby("ice skating");
+        c1.addAddresses(a1);
+        c2.addAddresses(a2);
         em.persist(c1);
         em.persist(c2);
         em.getTransaction().commit();
