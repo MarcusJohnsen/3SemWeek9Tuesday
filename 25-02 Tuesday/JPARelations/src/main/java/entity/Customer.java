@@ -3,35 +3,52 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="Customer")
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer customer_id;
+    
     private String firstName;
     private String lastName;
+    
+    
+    @ElementCollection
+    @CollectionTable(
+            name ="Hobbies",
+            joinColumns=@JoinColumn(name="customer_id")
+    )
+    @Column(name="hobby_name")
     private List<String> hobbies = new ArrayList();
-
-    public List addHobby(String s) {
-        
-        return hobbies;
+    
+    @OneToOne
+    private Address address;
+    
+    
+    public void addHobby(String s) {
+        hobbies.add(s);
     }
     
     public String getHobbies() {
-        
-        return hobbies.get(0);
+        return String.join(",", hobbies);
     }
+
     
-    
-    public Customer(Integer id, String firstName, String lastName) {
-        this.id = id;
+    public Customer(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -39,11 +56,11 @@ public class Customer implements Serializable {
     public Customer() {}
     
     public Integer getId() {
-        return id;
+        return customer_id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.customer_id = id;
     }
 
     public String getFirstName() {
